@@ -14,18 +14,18 @@ date,os,source,country,impressions,clicks,installs,spend,revenue
 2018-01-03,ios,D,CN,22587,934,151,3113.2221889366906,1324.9620346669
 ```
 
-Common (SQL like) queries such as:
+Common SQL queries such as:
 ```
-SELECT country, channel, sum(impressions) as impressions, sum(clicks) as clicks
+SELECT country, source, sum(impressions) as impressions, sum(clicks) as clicks
 FROM dataset
 WHERE date < '2018-03-02'
-GROUP BY country, channel
+GROUP BY country, source
 ORDER BY clicks DESC
 ```
 
 can be translated to an API request such as:
 ```
-http://{DOMAIN}:{PORT}/api/metrics?select=impressions,clicks&groupby=channel,country&date_before=2018-03-01&ordering=-clicks
+http://{DOMAIN}:{PORT}/api/metrics?select=impressions,clicks&groupby=source,country&date_before=2018-03-01&ordering=-clicks
 ```
 
 Example response:
