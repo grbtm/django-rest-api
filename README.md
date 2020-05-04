@@ -30,7 +30,24 @@ http://{DOMAIN}:{PORT}/api/endpoint?select=impressions,clicks&groupby=source,cou
 
 Example response:
 ```
-
+{
+    "count": 49,
+    "next": "http://127.0.0.1:8000/api/endpoint?date_before=2018-03-01&groupby=source%2Ccountry&limit=20&offset=20&ordering=-clicks&select=impressions%2Cclicks",
+    "previous": null,
+    "results": [
+        {
+            "source": "C",
+            "country": "CA",
+            "impressions": 73441,
+            "clicks": 3517
+        },
+        {
+            "source": "C",
+            "country": "JP",
+            "impressions": 75936,
+            "clicks": 2698
+        },
+        [...]
 ```
 
 ## Quickstart
