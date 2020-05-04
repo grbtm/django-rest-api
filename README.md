@@ -3,7 +3,7 @@ Simple RESTful HTTP API to query a dataset. Implemented with Django Rest framewo
 
 The REST API offers an interface to query a dataset from a RDBMS (example sqlite database is included in repo).
 
-Consider an example dataset such as:
+Consider an example dataset of metrics such as:
 ```
 date,os,source,country,impressions,clicks,installs,spend,revenue
 2018-01-01,ios,B,US,17590,320,94,764.5310552912023,2024.2677277486446
@@ -14,7 +14,7 @@ date,os,source,country,impressions,clicks,installs,spend,revenue
 2018-01-03,ios,D,CN,22587,934,151,3113.2221889366906,1324.9620346669
 ```
 
-Common SQL queries such as:
+A common SQL queries such as:
 ```
 SELECT country, source, sum(impressions) as impressions, sum(clicks) as clicks
 FROM dataset
@@ -23,7 +23,7 @@ GROUP BY country, source
 ORDER BY clicks DESC
 ```
 
-can be translated to an API request such as:
+can be translated to an API request:
 ```
 http://{DOMAIN}:{PORT}/api/endpoint?select=impressions,clicks&groupby=source,country&date_before=2018-03-01&ordering=-clicks
 ```
@@ -100,3 +100,35 @@ Available parameters for `GET` requests:
 `groupby`
 
 `ordering`
+
+### Other example queries
+
+A)
+```
+SELECT sum(installs) as installs, date
+FROM dataset
+WHERE (date >= '2018-03-01') AND (date <= '2018-03-31') AND (os = 'ios')
+GROUP BY date
+ORDER BY date ASC
+```
+converted to API request:
+```
+http://{DOMAIN}:{PORT}/api/endpoint?select=installs&os=ios&groupby=date&date_after=2018-03-01&date_before=2018-03-31&ordering=date
+```
+Response:
+```
+{
+    "count": 25,
+    "next": "http://127.0.0.1:8000/api/endpoint?date_after=2018-05-01&date_before=2018-05-31&groupby=date&limit=20&offset=20&ordering=date&os=ios&select=installs",
+    "previous": null,
+    "results": [
+        {
+            "date": "2018-05-01",
+            "installs": 45
+        },
+        {
+            "date": "2018-05-02",
+            "installs": 179
+        },
+        [...]
+```
