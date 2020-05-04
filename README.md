@@ -1,5 +1,5 @@
 # django-rest-api
-RESTful HTTP API to query a dataset. Implemented with Django Rest framework.
+Simple RESTful HTTP API to query a dataset. Implemented with Django Rest framework.
 
 The REST API offers an interface to query a dataset from a RDBMS.
 
