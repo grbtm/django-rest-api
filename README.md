@@ -25,7 +25,7 @@ ORDER BY clicks DESC
 
 can be translated to an API request such as:
 ```
-http://{DOMAIN}:{PORT}/api/metrics?select=impressions,clicks&groupby=source,country&date_before=2018-03-01&ordering=-clicks
+http://{DOMAIN}:{PORT}/api/endpoint?select=impressions,clicks&groupby=source,country&date_before=2018-03-01&ordering=-clicks
 ```
 
 Example response:
@@ -36,8 +36,8 @@ Example response:
 ## Quickstart
 Clone the repository
 ```
-git clone https://github.com/grbtm/adjust-api-endpoint.git
-cd adjust-api-endpoint
+git clone https://github.com/grbtm/django-rest-api.git
+cd django-rest-api
 ```
 Create a virtual env and activate it, install requirements into the environment:
 ```
@@ -47,18 +47,18 @@ pip install -r requirements.txt
 ```
 Start the Django test server:
 ```
-cd metrics
+cd endpoint
 python manage.py runserver
 ```
 Start for example with viewing all the records:
 ```
-http://127.0.0.1:8000/api/metrics
+http://127.0.0.1:8000/api/endpoint
 ```
 
 ## Tests
 To run the tests, `cd` to directory of manage.py:
 ```
-cd /path/to/adjust-api-endpoint/metrics
+cd /path/to/django-rest-api/endpoint
 python manage.py test
 ```
 
@@ -71,7 +71,7 @@ Available parameters for `GET` requests:
 `date`
 `date_after`
 `date_before`
-`channel`
+`source`
 `country`
 `os`
 `impressions`
